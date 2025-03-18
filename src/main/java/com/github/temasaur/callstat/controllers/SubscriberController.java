@@ -2,6 +2,7 @@ package com.github.temasaur.callstat.controllers;
 
 import com.github.temasaur.callstat.models.Subscriber;
 import com.github.temasaur.callstat.services.subscriber.SubscriberService;
+import com.github.temasaur.callstat.utils.SubscriberGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,12 +21,9 @@ public class SubscriberController {
     }
 
     @GetMapping("/set-subscribers")
-    public void setSubscriber() {
-        List<Subscriber> subscribers = Arrays.asList(
-            new Subscriber("1234567890"),
-            new Subscriber("1234567891")
-        );
-        subscriberService.setSubscribers(subscribers);
+    public String setSubscriber() {
+        subscriberService.setSubscribers(SubscriberGenerator.generate());
+        return "OK";
     }
 
     @GetMapping("/get-subscribers")
