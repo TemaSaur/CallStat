@@ -6,10 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SubscriberGenerator {
-    public static List<Subscriber> generate() {
+    public static List<Subscriber> generate(int count) {
         List<Subscriber> subscribers = new ArrayList<>();
 
-        for (int i = 0; i < 20; ++i) {
+        for (int i = 0; i < count; ++i) {
             // generate random 10 digits after 79
             StringBuilder msisdn = new StringBuilder("79");
             for (int j = 0; j < 9; j++) {
