@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.github.temasaur.callstat.services.record.RecordService;
 import com.github.temasaur.callstat.models.Record;
-import com.github.temasaur.callstat.utils.RecordGenerator;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
