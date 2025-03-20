@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public abstract class RecordServiceAbstractService implements RecordService {
+
 	protected SubscriberRepository subscriberRepository;
 	protected RecordGenerator recordGenerator;
 
@@ -36,10 +37,10 @@ public abstract class RecordServiceAbstractService implements RecordService {
 	}
 
 	@Override
-	public List<Record> generate() {
+	public List<Record> generate(int maxRecordCount) {
 		if (subscriberRepository.count() == 0) {
 			throw new IllegalStateException("Can't generate records. No subscribers found");
 		}
-		return recordGenerator.generate();
+		return recordGenerator.generate(maxRecordCount);
 	}
 }

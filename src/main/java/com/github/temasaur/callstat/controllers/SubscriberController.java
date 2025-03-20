@@ -32,10 +32,10 @@ public class SubscriberController {
      */
     @Operation(summary="Generate subscribers")
     @PostMapping("/subscribers/generate")
-    public ResponseEntity<List<Subscriber>> setSubscriber(
-            @RequestBody(required=false) GenerateRequest body
+    public ResponseEntity<List<Subscriber>> generate(
+        @RequestBody(required=false) GenerateSubscribersParams body
     ) {
-        int count = body.subscriberCount != null ? body.subscriberCount : 0;
+        int count = body != null && body.subscriberCount != null ? body.subscriberCount : 10;
         List<Subscriber> subscribers = SubscriberGenerator.generate(count);
         subscriberService.setSubscribers(subscribers);
         return ResponseEntity
@@ -50,12 +50,11 @@ public class SubscriberController {
      */
     @Operation(summary="Return all subscribers")
     @GetMapping("/subscribers")
-    public List<Subscriber> getSubscribers() {
+    public List<Subscriber> getAll() {
         return subscriberService.getSubscribers();
     }
 
-
-    private static class GenerateRequest {
+    private static class GenerateSubscribersParams {
         @Schema(example="10")
         @JsonProperty(required=false)
         public Integer subscriberCount;

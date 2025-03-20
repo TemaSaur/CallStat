@@ -7,5 +7,5 @@ import java.util.List;
 public interface RecordService {
 	List<Record> get();
 	void set(List<Record> records);
-	List<Record> generate();
+	List<Record> generate(int maxRecordCount);
 }

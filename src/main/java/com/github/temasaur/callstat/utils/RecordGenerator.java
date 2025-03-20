@@ -2,7 +2,6 @@ package com.github.temasaur.callstat.utils;
 
 import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 
 import com.github.temasaur.callstat.services.subscriber.SubscriberService;
 import com.github.temasaur.callstat.models.Record;
@@ -18,9 +17,6 @@ import java.util.Random;
 public class RecordGenerator {
     private final SubscriberService subscriberService;
 
-	@Value("${maxCalls}")
-	private int maxCalls;
-
     @Autowired
     public RecordGenerator(SubscriberService subscriberService) {
         this.subscriberService = subscriberService;
@@ -30,12 +26,10 @@ public class RecordGenerator {
 	 * Generate a list of records with random subscribers, start time, and end time
 	 * @return A list of records
 	 */
-    public List<Record> generate() {
+    public List<Record> generate(int maxCalls) {
         List<Subscriber> subscribers = subscriberService.getSubscribers();
 
-		if (subscribers.isEmpty()) {
-			throw new IllegalStateException("No subscribers found");
-		}
+		assert subscribers != null && !subscribers.isEmpty();
 
 		// start at a point a year ago.
 		LocalDateTime current = LocalDateTime.now().minusYears(1);
@@ -66,6 +60,10 @@ public class RecordGenerator {
 
 		Subscriber subscriber1 = subscribers.get(random.nextInt(subscribers.size()));
 		Subscriber subscriber2 = subscribers.get(random.nextInt(subscribers.size()));
+
+		while (subscriber1.equals(subscriber2)) {
+			subscriber2 = subscribers.get(random.nextInt(subscribers.size()));
+		}
 
 		LocalDateTime end = waitBetween(current, Duration.ofMinutes(1), Duration.ofMinutes(10));
 
