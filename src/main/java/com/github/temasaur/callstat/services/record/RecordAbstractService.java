@@ -10,15 +10,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public abstract class RecordServiceAbstractService implements RecordService {
+public abstract class RecordAbstractService implements RecordService {
 
 	protected SubscriberRepository subscriberRepository;
 	protected RecordGenerator recordGenerator;
 
-	public RecordServiceAbstractService() {}
+	public RecordAbstractService() {}
 
 	@Autowired
-	public RecordServiceAbstractService(
+	public RecordAbstractService(
 		SubscriberRepository subscriberRepository,
 		RecordGenerator recordGenerator
 	) {
@@ -27,7 +27,7 @@ public abstract class RecordServiceAbstractService implements RecordService {
 	}
 
 	@Override
-	public List<Record> get() {
+	public List<Record> getAll() {
 		throw new UnsupportedOperationException("Not implemented yet");
 	}
 

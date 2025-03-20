@@ -37,7 +37,7 @@ public class SubscriberController {
     ) {
         int count = body != null && body.subscriberCount != null ? body.subscriberCount : 10;
         List<Subscriber> subscribers = SubscriberGenerator.generate(count);
-        subscriberService.setSubscribers(subscribers);
+        subscriberService.set(subscribers);
         return ResponseEntity
                 .ok()
                 .contentType(MediaType.APPLICATION_JSON)
@@ -51,7 +51,7 @@ public class SubscriberController {
     @Operation(summary="Return all subscribers")
     @GetMapping("/subscribers")
     public List<Subscriber> getAll() {
-        return subscriberService.getSubscribers();
+        return subscriberService.getAll();
     }
 
     private static class GenerateSubscribersParams {

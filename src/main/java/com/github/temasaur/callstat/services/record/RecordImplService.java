@@ -13,11 +13,11 @@ import java.util.List;
 
 @Service
 @Primary
-public class RecordServiceImplService extends RecordServiceAbstractService {
+public class RecordImplService extends RecordAbstractService {
 	private final RecordRepository recordRepository;
 
 	@Autowired
-	public RecordServiceImplService(
+	public RecordImplService(
 			SubscriberRepository subscriberRepository,
 			RecordRepository recordRepository,
 			RecordGenerator recordGenerator
@@ -27,7 +27,7 @@ public class RecordServiceImplService extends RecordServiceAbstractService {
 	}
 
 	@Override
-	public List<Record> get() {
+	public List<Record> getAll() {
 		List<Record> records = new ArrayList<>();
 		for (Record record : recordRepository.findAll()) {
 			records.add(record);

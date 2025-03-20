@@ -7,12 +7,12 @@ public abstract class SubscriberAbstractService implements SubscriberService {
     public SubscriberAbstractService() {}
 
     @Override
-    public List<Subscriber> getSubscribers() {
+    public List<Subscriber> getAll() {
         throw new UnsupportedOperationException("Not implemented yet");
     }
 
     @Override
-    public void setSubscribers(List<Subscriber> subscribers) {
+    public void set(List<Subscriber> subscribers) {
         throw new UnsupportedOperationException("Not implemented yet");
     }
 }

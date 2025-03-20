@@ -20,7 +20,7 @@ public class SubscriberImplService extends SubscriberAbstractService {
     }
 
     @Override
-    public List<Subscriber> getSubscribers() {
+    public List<Subscriber> getAll() {
         List<Subscriber> subscribers = new ArrayList<>();
         for (Subscriber subscriber : repository.findAll()) {
             subscribers.add(subscriber);
@@ -29,7 +29,7 @@ public class SubscriberImplService extends SubscriberAbstractService {
     }
 
     @Override
-    public void setSubscribers(List<Subscriber> subscribers) {
+    public void set(List<Subscriber> subscribers) {
         repository.saveAll(subscribers);
     }
 }

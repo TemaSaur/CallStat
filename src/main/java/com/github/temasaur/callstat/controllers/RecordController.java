@@ -57,7 +57,7 @@ public class RecordController {
 		return ResponseEntity
 				.ok()
 				.contentType(MediaType.APPLICATION_JSON)
-				.body(recordService.get());
+				.body(recordService.getAll());
 	}
 
 	private interface RecordResponse extends List<Record> {}

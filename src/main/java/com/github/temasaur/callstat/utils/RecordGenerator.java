@@ -27,7 +27,7 @@ public class RecordGenerator {
 	 * @return A list of records
 	 */
     public List<Record> generate(int maxCalls) {
-        List<Subscriber> subscribers = subscriberService.getSubscribers();
+        List<Subscriber> subscribers = subscriberService.getAll();
 
 		assert subscribers != null && !subscribers.isEmpty();
 

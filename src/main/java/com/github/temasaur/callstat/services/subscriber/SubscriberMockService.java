@@ -10,12 +10,12 @@ public class SubscriberMockService extends SubscriberAbstractService {
     private List<Subscriber> subscribers;
 
     @Override
-    public List<Subscriber> getSubscribers() {
+    public List<Subscriber> getAll() {
         return subscribers;
     }
 
     @Override
-    public void setSubscribers(List<Subscriber> subscribers) {
+    public void set(List<Subscriber> subscribers) {
         this.subscribers = subscribers;
     }
 }
