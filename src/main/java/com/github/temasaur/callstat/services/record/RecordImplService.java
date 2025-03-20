@@ -11,6 +11,9 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Реализация сервиса записей о звонках на базе данных
+ */
 @Service
 @Primary
 public class RecordImplService extends RecordAbstractService {

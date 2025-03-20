@@ -7,15 +7,13 @@ import java.util.List;
 
 import com.github.temasaur.callstat.utils.RecordGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-@Service
+/**
+ * Реализация сервиса записей о звонках по умолчанию
+ */
 public abstract class RecordAbstractService implements RecordService {
-
 	protected SubscriberRepository subscriberRepository;
 	protected RecordGenerator recordGenerator;
-
-	public RecordAbstractService() {}
 
 	@Autowired
 	public RecordAbstractService(

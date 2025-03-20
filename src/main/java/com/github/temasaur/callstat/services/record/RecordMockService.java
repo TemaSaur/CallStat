@@ -7,6 +7,9 @@ import com.github.temasaur.callstat.models.Record;
 
 import java.util.List;
 
+/**
+ * Реализация сервиса записей о звонках на списке
+ */
 @Service
 public class RecordMockService extends RecordAbstractService {
 	private List<Record> records;

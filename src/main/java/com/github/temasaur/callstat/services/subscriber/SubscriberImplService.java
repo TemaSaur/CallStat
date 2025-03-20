@@ -9,6 +9,9 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Реализация сервиса для управления абонентами на базе данных
+ */
 @Service
 @Primary
 public class SubscriberImplService extends SubscriberAbstractService {

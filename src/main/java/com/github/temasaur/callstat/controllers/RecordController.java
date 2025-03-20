@@ -19,6 +19,9 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Контроллер с базовыми ручками о записях о звонках
+ */
 @RestController
 public class RecordController {
 	private final RecordService recordService;
@@ -30,6 +33,11 @@ public class RecordController {
 		this.recordService = recordService;
 	}
 
+	/**
+	 * Генерирует записи о звонках
+	 * @param body Параметры: максимальное количество записей
+	 * @return Список записей о звонков
+	 */
 	@Operation(summary="Generate records", responses={
 		@ApiResponse(responseCode="200", content=@Content(schema=@Schema(implementation=RecordResponse.class)), description="Records generated successfully"),
 		@ApiResponse(responseCode="428", content=@Content(schema=@Schema(implementation=ErrorResponse.class)), description="Records generation failed")
@@ -51,6 +59,10 @@ public class RecordController {
 		}
 	}
 
+	/**
+	 * Возвращает список записей о звонках
+	 * @return Список записей о звонках
+	 */
 	@Operation(summary="Get records")
 	@GetMapping("/records")
 	public ResponseEntity<List<Record>> getAll() {

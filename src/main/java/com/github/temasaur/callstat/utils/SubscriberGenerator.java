@@ -5,6 +5,9 @@ import com.github.temasaur.callstat.models.Subscriber;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Генератор записей об абонентах
+ */
 public class SubscriberGenerator {
     public static List<Subscriber> generate(int count) {
         List<Subscriber> subscribers = new ArrayList<>();

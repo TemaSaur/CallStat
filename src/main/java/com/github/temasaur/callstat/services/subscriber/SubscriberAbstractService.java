@@ -3,6 +3,10 @@ package com.github.temasaur.callstat.services.subscriber;
 import com.github.temasaur.callstat.models.Subscriber;
 
 import java.util.List;
+
+/**
+ * Реализация сервиса для управления абонентами по умолчанию
+ */
 public abstract class SubscriberAbstractService implements SubscriberService {
     public SubscriberAbstractService() {}
 

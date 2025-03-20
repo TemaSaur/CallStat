@@ -5,6 +5,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Реализация сервиса для управления абонентами на списке
+ */
 @Service
 public class SubscriberMockService extends SubscriberAbstractService {
     private List<Subscriber> subscribers;

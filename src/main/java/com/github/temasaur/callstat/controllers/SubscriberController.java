@@ -15,7 +15,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
+/**
+ * Контроллер с ручками об абонентах
+ */
 @RestController
 public class SubscriberController {
     private SubscriberService subscriberService;
@@ -27,15 +31,24 @@ public class SubscriberController {
     }
 
     /**
-     * Генерирует 20 абонентов
+     * Генерирует абонентов
+     * @param body Параметры: количество абонентов
      * @return Список абонентов
      */
     @Operation(summary="Generate subscribers")
     @PostMapping("/subscribers/generate")
-    public ResponseEntity<List<Subscriber>> generate(
+    public ResponseEntity<Object> generate(
         @RequestBody(required=false) GenerateSubscribersParams body
     ) {
         int count = body != null && body.subscriberCount != null ? body.subscriberCount : 10;
+
+        if (count == 1) {
+            return ResponseEntity
+                    .status(400)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(Map.of("error", "Subscriber count cannot be 1"));
+        }
+
         List<Subscriber> subscribers = SubscriberGenerator.generate(count);
         subscriberService.set(subscribers);
         return ResponseEntity

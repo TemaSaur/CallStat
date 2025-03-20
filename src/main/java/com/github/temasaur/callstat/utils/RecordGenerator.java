@@ -13,6 +13,9 @@ import java.time.LocalDateTime;
 import java.time.Duration;
 import java.util.Random;
 
+/**
+ * Генератор записей о звонках
+ */
 @Component
 public class RecordGenerator {
     private final SubscriberService subscriberService;

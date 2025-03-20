@@ -4,6 +4,9 @@ import com.github.temasaur.callstat.models.Record;
 
 import java.util.List;
 
+/**
+ * Сервис для управления записями о звонках
+ */
 public interface RecordService {
 	List<Record> getAll();
 	void set(List<Record> records);
