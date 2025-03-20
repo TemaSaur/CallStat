@@ -9,7 +9,6 @@ import com.github.temasaur.callstat.models.Record;
 import java.util.List;
 
 @Service
-@Primary
 public class RecordServiceMockService extends RecordServiceAbstractService {
 	private List<Record> records;
 

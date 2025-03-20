@@ -12,7 +12,7 @@ import jakarta.persistence.Table;
 public class Record {
     @Id
     @GeneratedValue
-    private Long id;
+    private Integer id;
 
     @ManyToOne
     public Subscriber initiator;
