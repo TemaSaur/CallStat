@@ -31,13 +31,12 @@ public class RecordGeneratorTest {
 
     private final RecordGenerator recordGenerator;
     private final SubscriberService subscriberService;
-    @Autowired
-    private RecordImplService recordImplService;
 
     @Autowired
     public RecordGeneratorTest(
             RecordGenerator recordGenerator,
-            SubscriberService subscriberService
+            SubscriberService subscriberService,
+            RecordImplService recordImplService
     ) {
         this.recordGenerator = recordGenerator;
         this.subscriberService = subscriberService;
