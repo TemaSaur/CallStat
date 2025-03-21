@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,11 +23,7 @@ public class SubscriberImplService extends SubscriberAbstractService {
 
     @Override
     public List<Subscriber> getAll() {
-        List<Subscriber> subscribers = new ArrayList<>();
-        for (Subscriber subscriber : repository.findAll()) {
-            subscribers.add(subscriber);
-        }
-        return subscribers;
+        return (List<Subscriber>) repository.findAll();
     }
 
     @Override

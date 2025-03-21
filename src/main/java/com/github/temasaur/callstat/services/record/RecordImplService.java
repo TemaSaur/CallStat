@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -31,11 +30,7 @@ public class RecordImplService extends RecordAbstractService {
 
 	@Override
 	public List<Record> getAll() {
-		List<Record> records = new ArrayList<>();
-		for (Record record : recordRepository.findAll()) {
-			records.add(record);
-		}
-		return records;
+		return (List<Record>) recordRepository.findAll();
 	}
 
 	@Override
