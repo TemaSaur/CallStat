@@ -21,4 +21,9 @@ public class SubscriberMockService extends SubscriberAbstractService {
     public void set(List<Subscriber> subscribers) {
         this.subscribers = subscribers;
     }
+
+    @Override
+    public boolean isEmpty() {
+        return subscribers == null || subscribers.isEmpty();
+    }
 }

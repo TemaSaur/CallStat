@@ -1,9 +1,7 @@
 package com.github.temasaur.callstat.utils;
 
 import org.springframework.stereotype.Component;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import com.github.temasaur.callstat.services.subscriber.SubscriberService;
 import com.github.temasaur.callstat.models.Record;
 import com.github.temasaur.callstat.models.Subscriber;
 
@@ -18,19 +16,11 @@ import java.util.Random;
  */
 @Component
 public class RecordGenerator {
-    private final SubscriberService subscriberService;
-
-    @Autowired
-    public RecordGenerator(SubscriberService subscriberService) {
-        this.subscriberService = subscriberService;
-    }
-
 	/**
 	 * Generate a list of records with random subscribers, start time, and end time
 	 * @return A list of records
 	 */
-    public List<Record> generate(int maxCalls) {
-        List<Subscriber> subscribers = subscriberService.getAll();
+    public List<Record> generate(int maxCalls, List<Subscriber> subscribers) {
 
 		assert subscribers != null && !subscribers.isEmpty();
 

@@ -10,4 +10,5 @@ import java.util.List;
 public interface SubscriberService {
     List<Subscriber> getAll();
     void set(List<Subscriber> subscribers);
+    boolean isEmpty();
 }

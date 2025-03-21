@@ -45,26 +45,25 @@ public class RecordGeneratorTest {
 
     @Test
     public void shouldThrowWithNoSubscribers() {
-        subscriberService.set(List.of());
-        assertThrows(AssertionError.class, () -> recordGenerator.generate(COUNT));
+        assertThrows(AssertionError.class, () -> recordGenerator.generate(COUNT, List.of()));
     }
 
     @Nested
     public class WithSubscribers {
+        private List<Subscriber> subscribers;
 
         @BeforeEach
         public void setup() {
-            List<Subscriber> subscribers = List.of(
+            subscribers = List.of(
                     new Subscriber("1234"),
                     new Subscriber("5678"));
-            subscriberService.set(subscribers);
-            records = recordGenerator.generate(COUNT);
+            records = recordGenerator.generate(COUNT, subscribers);
         }
 
 
         @Test
         public void shouldNotThrow() {
-            assertDoesNotThrow(() -> recordGenerator.generate(COUNT));
+            assertDoesNotThrow(() -> recordGenerator.generate(COUNT, subscribers));
         }
 
         @Test
@@ -76,15 +75,15 @@ public class RecordGeneratorTest {
 
         @Test
         public void shouldBeEmptyOn0() {
-            List<Record> subscribers = recordGenerator.generate(0);
-            assertTrue(subscribers.isEmpty());
+            List<Record> records = recordGenerator.generate(0, subscribers);
+            assertTrue(records.isEmpty());
         }
 
         @Test
         public void shouldMatchLength() {
             for (int i = 1; i <= 20; i++) {
-                List<Record> subscribers = recordGenerator.generate(i);
-                assertEquals(subscribers.size(), i);
+                List<Record> records = recordGenerator.generate(i, subscribers);
+                assertEquals(records.size(), i);
             }
         }
 
@@ -135,7 +134,7 @@ public class RecordGeneratorTest {
                     new Subscriber("1234"),
                     new Subscriber("5678"));
             subscriberService.set(subscribers);
-            records = recordGenerator.generate(-1);
+            records = recordGenerator.generate(-1, subscribers);
         }
 
         @Test

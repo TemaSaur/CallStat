@@ -19,4 +19,9 @@ public abstract class SubscriberAbstractService implements SubscriberService {
     public void set(List<Subscriber> subscribers) {
         throw new UnsupportedOperationException("Not implemented yet");
     }
+
+    @Override
+    public boolean isEmpty() {
+        throw new UnsupportedOperationException("Not implemented yet");
+    }
 }

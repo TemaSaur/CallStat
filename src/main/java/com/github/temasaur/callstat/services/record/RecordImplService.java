@@ -2,7 +2,7 @@ package com.github.temasaur.callstat.services.record;
 
 import com.github.temasaur.callstat.models.Record;
 import com.github.temasaur.callstat.repository.RecordRepository;
-import com.github.temasaur.callstat.repository.SubscriberRepository;
+import com.github.temasaur.callstat.services.subscriber.SubscriberService;
 import com.github.temasaur.callstat.utils.RecordGenerator;
 import com.github.temasaur.callstat.utils.TimeRange;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,11 +21,11 @@ public class RecordImplService extends RecordAbstractService {
 
 	@Autowired
 	public RecordImplService(
-			SubscriberRepository subscriberRepository,
+			SubscriberService subscriberService,
 			RecordRepository recordRepository,
 			RecordGenerator recordGenerator
 	) {
-		super(subscriberRepository, recordGenerator);
+		super(subscriberService, recordGenerator);
 		this.recordRepository = recordRepository;
 	}
 

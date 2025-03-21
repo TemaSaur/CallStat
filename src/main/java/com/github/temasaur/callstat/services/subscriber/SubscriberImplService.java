@@ -31,4 +31,9 @@ public class SubscriberImplService extends SubscriberAbstractService {
         repository.deleteAll();
         repository.saveAll(subscribers);
     }
+
+    @Override
+    public boolean isEmpty() {
+        return repository.count() == 0;
+    }
 }

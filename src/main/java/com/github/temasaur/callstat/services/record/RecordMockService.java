@@ -1,8 +1,9 @@
 package com.github.temasaur.callstat.services.record;
 
-import com.github.temasaur.callstat.repository.SubscriberRepository;
+import com.github.temasaur.callstat.services.subscriber.SubscriberService;
 import com.github.temasaur.callstat.utils.RecordGenerator;
 import com.github.temasaur.callstat.utils.TimeRange;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.github.temasaur.callstat.models.Record;
 
@@ -16,11 +17,12 @@ import java.util.List;
 public class RecordMockService extends RecordAbstractService {
 	private List<Record> records;
 
+	@Autowired
 	public RecordMockService(
-		SubscriberRepository subscriberRepository,
+		SubscriberService subscriberService,
 		RecordGenerator recordGenerator
 	) {
-		super(subscriberRepository, recordGenerator);
+		super(subscriberService, recordGenerator);
 	}
 
 	@Override
