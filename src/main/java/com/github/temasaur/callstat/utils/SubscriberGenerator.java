@@ -1,6 +1,7 @@
 package com.github.temasaur.callstat.utils;
 
 import com.github.temasaur.callstat.models.Subscriber;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +9,7 @@ import java.util.List;
 /**
  * Генератор записей об абонентах
  */
+@Component
 public class SubscriberGenerator {
     public static List<Subscriber> generate(int count) {
         List<Subscriber> subscribers = new ArrayList<>();

@@ -40,7 +40,8 @@ public class RecordGenerator {
 
 		List<Record> records = new ArrayList<>();
 		// repeat until `maxCalls` records are created or the time is present
-		while (records.size() < maxCalls && current.isBefore(now)) {
+
+		while ((maxCalls < 0 || (records.size() < maxCalls)) && current.isBefore(now)) {
 			current = waitBetween(current, Duration.ofHours(1), Duration.ofHours(12));
 
 			Record record = generateRecord(current, subscribers);
