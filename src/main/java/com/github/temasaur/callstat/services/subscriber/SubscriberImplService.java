@@ -28,6 +28,7 @@ public class SubscriberImplService extends SubscriberAbstractService {
 
     @Override
     public void set(List<Subscriber> subscribers) {
+        repository.deleteAll();
         repository.saveAll(subscribers);
     }
 }

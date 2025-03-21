@@ -14,7 +14,7 @@ public class SubscriberMockService extends SubscriberAbstractService {
 
     @Override
     public List<Subscriber> getAll() {
-        return subscribers;
+        return subscribers != null ? subscribers : List.of();
     }
 
     @Override

@@ -78,7 +78,7 @@ public class RecordController {
 	private interface ErrorResponse extends Map<String, String> {}
 
 
-	private static class GenerateRecordsParams {
+	public static class GenerateRecordsParams {
 		@Schema(example="1000")
 		@JsonProperty(required=false)
 		public Integer maxRecordCount;

@@ -67,7 +67,7 @@ public class SubscriberController {
         return subscriberService.getAll();
     }
 
-    private static class GenerateSubscribersParams {
+    public static class GenerateSubscribersParams {
         @Schema(example="10")
         @JsonProperty(required=false)
         public Integer subscriberCount;
