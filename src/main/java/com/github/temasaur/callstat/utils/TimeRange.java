@@ -8,16 +8,25 @@ public class TimeRange {
     public LocalDate start;
     public LocalDate end;
 
+    public LocalDateTime startTime() {
+        return getTime(start);
+    }
+
+    public LocalDateTime endTime() {
+        return getTime(end);
+    }
+
     public TimeRange(String month) {
         start = LocalDate.parse(month + "-01", DateTimeFormatter.ISO_LOCAL_DATE);
         end = start.plusMonths(1);
     }
 
     public boolean contains(LocalDateTime dateTime) {
-        LocalDateTime startTime = start.atStartOfDay();
-        LocalDateTime endTime = end.atStartOfDay();
+        return dateTime.isAfter(startTime()) && dateTime.isBefore(endTime());
+    }
 
-        return dateTime.isAfter(startTime) && dateTime.isBefore(endTime);
+    private LocalDateTime getTime(LocalDate date) {
+        return date.atStartOfDay();
     }
 
 }

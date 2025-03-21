@@ -3,7 +3,6 @@ package com.github.temasaur.callstat.services.record;
 import com.github.temasaur.callstat.repository.SubscriberRepository;
 import com.github.temasaur.callstat.utils.RecordGenerator;
 import com.github.temasaur.callstat.utils.TimeRange;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import com.github.temasaur.callstat.models.Record;
 
@@ -14,7 +13,6 @@ import java.util.List;
  * Реализация сервиса записей о звонках на списке
  */
 @Service
-@Primary
 public class RecordMockService extends RecordAbstractService {
 	private List<Record> records;
 
