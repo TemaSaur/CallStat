@@ -3,12 +3,14 @@ package com.github.temasaur.callstat.utils;
 import com.github.temasaur.callstat.CallStatApplication;
 import com.github.temasaur.callstat.models.Record;
 import com.github.temasaur.callstat.models.Subscriber;
+import com.github.temasaur.callstat.services.record.RecordImplService;
 import com.github.temasaur.callstat.services.subscriber.SubscriberService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
@@ -22,23 +24,29 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = CallStatApplication.class)
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class RecordGeneratorTest {
     private final int COUNT = 100;
     private List<Record> records;
 
     private final RecordGenerator recordGenerator;
     private final SubscriberService subscriberService;
+    @Autowired
+    private RecordImplService recordImplService;
 
     @Autowired
     public RecordGeneratorTest(
             RecordGenerator recordGenerator,
-            SubscriberService subscriberService) {
+            SubscriberService subscriberService
+    ) {
         this.recordGenerator = recordGenerator;
         this.subscriberService = subscriberService;
+        recordImplService.set(List.of());
     }
 
     @Test
     public void shouldThrowWithNoSubscribers() {
+        subscriberService.set(List.of());
         assertThrows(AssertionError.class, () -> recordGenerator.generate(COUNT));
     }
 

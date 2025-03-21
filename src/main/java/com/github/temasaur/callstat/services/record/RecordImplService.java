@@ -46,6 +46,7 @@ public class RecordImplService extends RecordAbstractService {
 
 	@Override
 	public void set(List<Record> records) {
+		recordRepository.deleteAll();
 		recordRepository.saveAll(records);
 	}
 }
