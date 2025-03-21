@@ -139,6 +139,7 @@ UDR представляет из себя объект в формате JSON, 
 Дополнительная Swagger документация доступна по `/docs`.
 
 __Screenshot__
+![Swagger](swagger.png)
 
 ## Архитектура:
 
@@ -184,7 +185,7 @@ com.github.temasaur.callstat/
     #!/bin/bash
     mvn clean install
     ```
-    
+
 3. Запустить приложение
 
     ```bash
