@@ -16,4 +16,5 @@ public interface RecordService {
 	void set(List<Record> records);
 	List<Record> generate(int maxRecordCount);
 	UsageDataReport createUdrReport(String msisdn, String month);
+	List<UsageDataReport> createUdrReport(String msisdn);
 }

@@ -1,9 +1,11 @@
 package com.github.temasaur.callstat.services.record;
 
 import com.github.temasaur.callstat.models.Record;
+import com.github.temasaur.callstat.models.Subscriber;
 import com.github.temasaur.callstat.models.UsageDataReport;
 import com.github.temasaur.callstat.repository.SubscriberRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.github.temasaur.callstat.utils.RecordGenerator;
@@ -63,5 +65,14 @@ public abstract class RecordAbstractService implements RecordService {
 				: getByWithin(msisdn, new TimeRange(month));
 
 		return UsageDataReportCreator.create(msisdn, records);
+	}
+
+	@Override
+	public List<UsageDataReport> createUdrReport(String month) {
+		List<UsageDataReport> reports = new ArrayList<>();
+		for (Subscriber subscriber : subscriberRepository.findAll()) {
+			reports.add(createUdrReport(subscriber.msisdn, month));
+		}
+		return reports;
 	}
 }

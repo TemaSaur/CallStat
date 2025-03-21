@@ -5,17 +5,16 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.time.Duration;
 
 public class UsageDataReport {
+    @Schema(example="79123456789")
     public String msisdn;
     public CallData incomingCall;
     public CallData outcomingCall;
 
     public static class CallData {
-//        private Duration duration;
         @Schema(example="00:02:50")
         public String totalTime;
 
         public CallData(Duration duration) {
-//            this.duration = duration;
             int hours = duration.toHoursPart();
             int minutes = duration.toMinutesPart() % 60;
             int seconds = duration.toSecondsPart() % 60;
