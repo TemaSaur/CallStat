@@ -1,11 +1,14 @@
 package com.github.temasaur.callstat.services.record;
 
 import com.github.temasaur.callstat.models.Record;
+import com.github.temasaur.callstat.models.UsageDataReport;
 import com.github.temasaur.callstat.repository.SubscriberRepository;
 
 import java.util.List;
 
 import com.github.temasaur.callstat.utils.RecordGenerator;
+import com.github.temasaur.callstat.utils.TimeRange;
+import com.github.temasaur.callstat.utils.UsageDataReportCreator;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -30,6 +33,16 @@ public abstract class RecordAbstractService implements RecordService {
 	}
 
 	@Override
+	public List<Record> getBy(String msisdn) {
+		throw new UnsupportedOperationException("Not implemented yet");
+	}
+
+	@Override
+	public List<Record> getByWithin(String msisdn, TimeRange timeRange) {
+		throw new UnsupportedOperationException("Not implemented yet");
+	}
+
+	@Override
 	public void set(List<Record> records) {
 		throw new UnsupportedOperationException("Not implemented yet");
 	}
@@ -40,5 +53,15 @@ public abstract class RecordAbstractService implements RecordService {
 			throw new IllegalStateException("Can't generate records. No subscribers found");
 		}
 		return recordGenerator.generate(maxRecordCount);
+	}
+
+	@Override
+	public UsageDataReport createUdrReport(String msisdn, String month) {
+		assert msisdn != null;
+		List<Record> records = month == null
+				? getBy(msisdn)
+				: getByWithin(msisdn, new TimeRange(month));
+
+		return UsageDataReportCreator.create(msisdn, records);
 	}
 }

@@ -5,7 +5,6 @@ import com.github.temasaur.callstat.repository.RecordRepository;
 import com.github.temasaur.callstat.repository.SubscriberRepository;
 import com.github.temasaur.callstat.utils.RecordGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,7 +13,7 @@ import java.util.List;
  * Реализация сервиса записей о звонках на базе данных
  */
 @Service
-@Primary
+//@Primary
 public class RecordImplService extends RecordAbstractService {
 	private final RecordRepository recordRepository;
 
