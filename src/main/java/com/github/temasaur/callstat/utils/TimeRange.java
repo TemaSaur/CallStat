@@ -16,6 +16,11 @@ public class TimeRange {
         return getTime(end);
     }
 
+    public TimeRange(LocalDate start, LocalDate end) {
+        this.start = start;
+        this.end = end;
+    }
+
     public TimeRange(String month) {
         start = LocalDate.parse(month + "-01", DateTimeFormatter.ISO_LOCAL_DATE);
         end = start.plusMonths(1);

@@ -1,5 +1,6 @@
 package com.github.temasaur.callstat.services.record;
 
+import com.github.temasaur.callstat.services.backgroundTask.BackgroundTaskService;
 import com.github.temasaur.callstat.services.subscriber.SubscriberService;
 import com.github.temasaur.callstat.utils.RecordGenerator;
 import com.github.temasaur.callstat.utils.TimeRange;
@@ -20,9 +21,10 @@ public class RecordMockService extends RecordAbstractService {
 	@Autowired
 	public RecordMockService(
 		SubscriberService subscriberService,
-		RecordGenerator recordGenerator
+		RecordGenerator recordGenerator,
+		BackgroundTaskService backgroundTaskService
 	) {
-		super(subscriberService, recordGenerator);
+		super(subscriberService, recordGenerator, backgroundTaskService);
 	}
 
 	@Override

@@ -37,6 +37,11 @@ public class UsageDataReportController {
         return recordService.createUdrReport(month);
     }
 
+    /*
+     * Different endpoints to not mix response data types
+     * /udr returns [{...}, ...]
+     * /udr/{msdin} returns {...}
+     */
     @Operation(summary="Create UDR report for a subscriber")
     @PostMapping("/udr/{msisdn}")
     public UsageDataReport create(

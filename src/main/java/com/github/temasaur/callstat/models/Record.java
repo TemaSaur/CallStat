@@ -8,7 +8,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "call_data_records")
+@Table(name = "records")
 public class Record {
     @Id
     @GeneratedValue

@@ -1,17 +1,27 @@
 package com.github.temasaur.callstat.services.record;
 
+import com.github.temasaur.callstat.models.BackgroundTask;
+import com.github.temasaur.callstat.models.CallDataRecord;
 import com.github.temasaur.callstat.models.Record;
 import com.github.temasaur.callstat.models.Subscriber;
 import com.github.temasaur.callstat.models.UsageDataReport;
+import com.github.temasaur.callstat.types.CsvStringer;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
+import java.io.IOException;
 
+import com.github.temasaur.callstat.services.backgroundTask.BackgroundTaskService;
 import com.github.temasaur.callstat.services.subscriber.SubscriberService;
+import com.github.temasaur.callstat.utils.CallDataRecordReportCreator;
+import com.github.temasaur.callstat.utils.CsvWriter;
 import com.github.temasaur.callstat.utils.RecordGenerator;
 import com.github.temasaur.callstat.utils.TimeRange;
 import com.github.temasaur.callstat.utils.UsageDataReportCreator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 
 /**
  * Реализация сервиса записей о звонках по умолчанию
@@ -19,14 +29,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 public abstract class RecordAbstractService implements RecordService {
 	protected SubscriberService subscriberService;
 	protected RecordGenerator recordGenerator;
+	protected BackgroundTaskService backgroundTaskService;
 
 	@Autowired
 	public RecordAbstractService(
 		SubscriberService subscriberService,
-		RecordGenerator recordGenerator
+		RecordGenerator recordGenerator,
+		BackgroundTaskService backgroundTaskService
 	) {
 		this.subscriberService = subscriberService;
 		this.recordGenerator = recordGenerator;
+		this.backgroundTaskService = backgroundTaskService;
 	}
 
 	@Override
@@ -74,5 +87,24 @@ public abstract class RecordAbstractService implements RecordService {
 			reports.add(createUdrReport(subscriber.msisdn, month));
 		}
 		return reports;
+	}
+
+	@Override
+	@Async
+	public void createCallDataRecordReport(String msisdn, TimeRange timeRange, UUID uuid) {
+		CompletableFuture.runAsync(() -> {
+			backgroundTaskService.setStatus(uuid, BackgroundTask.Status.RUNNING);
+
+			List<Record> records = getByWithin(msisdn, timeRange);
+			List<CallDataRecord> cdr = CallDataRecordReportCreator.create(msisdn, records);
+			String filename = "reports/" + msisdn + "_" + uuid.toString() + ".csv";
+
+			try {
+				CsvWriter.write(filename, CallDataRecord.getCsvHeader(), cdr.stream().map(r -> (CsvStringer)r).toList());
+				backgroundTaskService.setStatus(uuid, BackgroundTask.Status.FINISHED);
+			} catch (IOException | InterruptedException e) {
+				backgroundTaskService.setStatus(uuid, BackgroundTask.Status.FAILED);
+			}
+		});
 	}
 }

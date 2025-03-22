@@ -5,6 +5,9 @@ import com.github.temasaur.callstat.models.UsageDataReport;
 import com.github.temasaur.callstat.utils.TimeRange;
 
 import java.util.List;
+import java.util.UUID;
+
+import org.springframework.scheduling.annotation.Async;
 
 /**
  * Сервис для управления записями о звонках
@@ -17,4 +20,6 @@ public interface RecordService {
 	List<Record> generate(int maxRecordCount);
 	UsageDataReport createUdrReport(String msisdn, String month);
 	List<UsageDataReport> createUdrReport(String month);
+	@Async
+	void createCallDataRecordReport(String msisdn, TimeRange timeRange, UUID uuid);
 }
