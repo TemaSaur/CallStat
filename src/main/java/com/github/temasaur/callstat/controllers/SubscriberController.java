@@ -3,9 +3,9 @@ package com.github.temasaur.callstat.controllers;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.github.temasaur.callstat.models.Subscriber;
 import com.github.temasaur.callstat.services.subscriber.SubscriberService;
-import com.github.temasaur.callstat.utils.SubscriberGenerator;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +21,7 @@ import java.util.Map;
  * Контроллер с ручками об абонентах
  */
 @RestController
+@Tag(name="Subscribers")
 public class SubscriberController {
     private SubscriberService subscriberService;
     public SubscriberController() {}
@@ -49,7 +50,7 @@ public class SubscriberController {
                     .body(Map.of("error", "Subscriber count cannot be 1"));
         }
 
-        List<Subscriber> subscribers = SubscriberGenerator.generate(count);
+        List<Subscriber> subscribers = subscriberService.generate(count);
         subscriberService.set(subscribers);
         return ResponseEntity
                 .ok()

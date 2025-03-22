@@ -1,6 +1,7 @@
 package com.github.temasaur.callstat.services.subscriber;
 
 import com.github.temasaur.callstat.models.Subscriber;
+import com.github.temasaur.callstat.utils.SubscriberGenerator;
 
 import java.util.List;
 
@@ -23,5 +24,10 @@ public abstract class SubscriberAbstractService implements SubscriberService {
     @Override
     public boolean isEmpty() {
         throw new UnsupportedOperationException("Not implemented yet");
+    }
+
+    @Override
+    public List<Subscriber> generate (int count) {
+        return SubscriberGenerator.generate(count);
     }
 }

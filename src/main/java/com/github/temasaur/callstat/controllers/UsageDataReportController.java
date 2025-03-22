@@ -5,6 +5,7 @@ import com.github.temasaur.callstat.models.UsageDataReport;
 import com.github.temasaur.callstat.services.record.RecordService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
+@Tag(name="UDR Reports")
 public class UsageDataReportController {
     private RecordService recordService;
 
@@ -35,7 +37,7 @@ public class UsageDataReportController {
         return recordService.createUdrReport(month);
     }
 
-    @Operation(summary="Create UDR report")
+    @Operation(summary="Create UDR report for a subscriber")
     @PostMapping("/udr/{msisdn}")
     public UsageDataReport create(
             @PathVariable("msisdn") String msisdn,

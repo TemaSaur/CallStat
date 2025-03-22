@@ -9,6 +9,7 @@ import java.util.List;
  */
 public interface SubscriberService {
     List<Subscriber> getAll();
+    List<Subscriber> generate (int count);
     void set(List<Subscriber> subscribers);
     boolean isEmpty();
 }

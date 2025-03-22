@@ -1,6 +1,7 @@
 package com.github.temasaur.callstat.controllers;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,7 @@ import java.util.Map;
  * Контроллер с базовыми ручками о записях о звонках
  */
 @RestController
+@Tag(name="Records")
 public class RecordController {
 	private final RecordService recordService;
 
@@ -47,7 +49,7 @@ public class RecordController {
 			@RequestBody(required=false) GenerateRecordsParams body
 	) {
 		try {
-			int maxRecordCount = body != null && body.maxRecordCount != null ? body.maxRecordCount : 1000;
+			int maxRecordCount = body != null && body.maxRecordCount != null ? body.maxRecordCount : -1;
 			List<Record> records = recordService.generate(maxRecordCount);
 			recordService.set(records);
 			return ResponseEntity.ok(records);
