@@ -14,11 +14,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 import java.time.LocalDate;
@@ -64,7 +60,7 @@ public class CallDataRecordController {
 		@ApiResponse(responseCode="428", content=@Content(schema=@Schema(implementation=ErrorResponse.class)), description="Report not found")
 	})
     @GetMapping("/cdr/status/{uuid}")
-    public ResponseEntity<?> getCdrReportStatus(@RequestParam UUID uuid) {
+    public ResponseEntity<?> getCdrReportStatus(@PathVariable UUID uuid) {
         BackgroundTask task = backgroundTaskService.getState(uuid);
         if (task == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
