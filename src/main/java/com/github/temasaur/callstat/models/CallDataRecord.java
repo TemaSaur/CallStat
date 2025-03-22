@@ -33,7 +33,6 @@ public class CallDataRecord implements CsvStringer {
         sb.append(",");
 
         sb.append(formatDateTime(self.callEnd));
-        sb.append(",");
 
         return sb.toString();
     }

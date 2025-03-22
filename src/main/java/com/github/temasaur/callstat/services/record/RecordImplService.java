@@ -33,7 +33,7 @@ public class RecordImplService extends RecordAbstractService {
 
 	@Override
 	public List<Record> getBy(String msisdn) {
-		return (List<Record>) recordRepository.findByInitiator_MsisdnOrRecipient_Msisdn(msisdn, msisdn);
+		return (List<Record>) recordRepository.findByInitiator_MsisdnOrRecipient_MsisdnOrderByCallStartAsc(msisdn, msisdn);
 	}
 
 	@Override
