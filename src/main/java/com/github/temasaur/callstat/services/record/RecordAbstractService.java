@@ -93,7 +93,7 @@ public abstract class RecordAbstractService implements RecordService {
 	@Async
 	public void createCallDataRecordReport(String msisdn, TimeRange timeRange, UUID uuid) {
 		CompletableFuture.runAsync(() -> {
-			backgroundTaskService.setStatus(uuid, BackgroundTask.Status.RUNNING);
+			backgroundTaskService.setState(uuid, new BackgroundTask(uuid));
 
 			List<Record> records = getByWithin(msisdn, timeRange);
 			List<CallDataRecord> cdr = CallDataRecordReportCreator.create(msisdn, records);
@@ -101,9 +101,9 @@ public abstract class RecordAbstractService implements RecordService {
 
 			try {
 				CsvWriter.write(filename, CallDataRecord.getCsvHeader(), cdr.stream().map(r -> (CsvStringer)r).toList());
-				backgroundTaskService.setStatus(uuid, BackgroundTask.Status.FINISHED);
+				backgroundTaskService.setStatusMessage(uuid, BackgroundTask.Status.FINISHED, "Report created successfully");
 			} catch (IOException | InterruptedException e) {
-				backgroundTaskService.setStatus(uuid, BackgroundTask.Status.FAILED);
+				backgroundTaskService.setStatusMessage(uuid, BackgroundTask.Status.FAILED, e.getMessage());
 			}
 		});
 	}
