@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.github.temasaur.callstat.services.record.RecordService;
+import com.github.temasaur.callstat.types.ErrorResponse;
 import com.github.temasaur.callstat.models.Record;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -75,10 +76,6 @@ public class RecordController {
 	}
 
 	private interface RecordResponse extends List<Record> {}
-
-	@Schema(example = "{\"error\": \"Records generation failed\"}")
-	private interface ErrorResponse extends Map<String, String> {}
-
 
 	public static class GenerateRecordsParams {
 		@Schema(example="1000")

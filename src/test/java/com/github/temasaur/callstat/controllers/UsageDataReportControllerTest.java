@@ -1,5 +1,6 @@
 package com.github.temasaur.callstat.controllers;
 
+import com.github.temasaur.callstat.services.backgroundTask.BackgroundTaskMockService;
 import com.github.temasaur.callstat.services.record.RecordMockService;
 import com.github.temasaur.callstat.services.subscriber.SubscriberMockService;
 import com.github.temasaur.callstat.utils.RecordGenerator;
@@ -22,7 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 @WebMvcTest(UsageDataReportController.class)
-@Import({SubscriberMockService.class, RecordMockService.class, RecordGenerator.class, SubscriberController.class, RecordController.class})
+@Import({SubscriberMockService.class, RecordMockService.class, BackgroundTaskMockService.class, RecordGenerator.class, SubscriberController.class, RecordController.class})
 public class UsageDataReportControllerTest {
     @Autowired
     private MockMvc mockMvc;
