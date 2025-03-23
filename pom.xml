@@ -10,9 +10,9 @@
     </parent>
     <groupId>com.github.temasaur</groupId>
     <artifactId>callstat</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>callstat</name>
-    <description>callstat</description>
+    <description>CDR-UDR call reporting (test task for Nexign)</description>
     <url/>
     <licenses>
         <license/>
