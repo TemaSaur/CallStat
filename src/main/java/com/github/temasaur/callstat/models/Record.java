@@ -1,23 +1,26 @@
 package com.github.temasaur.callstat.models;
 
 import java.time.LocalDateTime;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+
+import jakarta.persistence.*;
 
 @Entity
-@Table(name = "records")
+@Table(name = "records", indexes = {
+    @Index(name = "initiator_idx", columnList = "initiator_id"),
+    @Index(name = "recipient_idx", columnList = "recipient_id"),
+	@Index(name = "call_start_idx", columnList = "call_start") // for sorting
+})
 public class Record {
     @Id
     @GeneratedValue
-    private Integer id;
+    private Long id;
 
     @ManyToOne
+	@JoinColumn(name = "initiator_id")
     public Subscriber initiator;
 
     @ManyToOne
+	@JoinColumn(name = "recipient_id")
     public Subscriber recipient;
 
 	public LocalDateTime callStart;
